@@ -1,34 +1,35 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Intermediate OOP by Building a Platformer Game</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="start-screen">
+      <h1 class="main-title">freeCodeCamp Code Warrior</h1>
+      <p class="instructions">
+        Help the main player navigate to the yellow checkpoints.
+      </p>
+      <p class="instructions">
+        Use the keyboard arrows to move the player around.
+      </p>
+      <p class="instructions">You can also use the spacebar to jump.</p>
 
-<html lan="en">
-<head>
-<meta charset = "UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+      <div class="btn-container">
+        <button class="btn" id="start-btn">Start Game</button>
+      </div>
+    </div>
 
-<title>Palindrome-Checker</title>
-<link rel="stylesheet" href="styles.css"/>
+    <div class="checkpoint-screen">
+      <h2>Congrats!</h2>
+      <p>You reached the last checkpoint.</p>
+    </div>
 
-</head>
-<body>
-<h1 id="title">
-  <div>Is it a Palindrome</div>
-</h1>
+    <canvas id="canvas"></canvas>
 
-<form>
-<section id="palindromeChecker">
-  <div>Enter in text to check for a palindrome</div>
-  <input id = "text-input" required type="text" placeholder="Palindrome?"></input>
-  <button id ="check-btn" type="submit" onclick="">
-    Check
-  </button>
-</section>
-</form>
-
-<section id="resultSection">
-  <p id="result"></p>
-
-</section>
-<script src="script.js"></script>
-
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
