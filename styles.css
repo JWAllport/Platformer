@@ -14,51 +14,6 @@ body {
   background-color: var(--main-bg-color);
 }
 
-.start-screen {
-  background-color: var(--section-bg-color);
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  border-radius: 30px;
-  padding: 20px;
-  padding-bottom: 5px;
-}
-
-.main-title {
-  text-align: center;
-}
-
-.instructions {
-  text-align: center;
-  font-size: 1.2rem;
-  margin: 15px;
-  line-height: 2rem;
-}
-
-.btn {
-  cursor: pointer;
-  width: 100px;
-  margin: 10px;
-  color: #0a0a23;
-  font-size: 18px;
-  background-color: var(--golden-yellow);
-  background-image: linear-gradient(#fecc4c, #ffac33);
-  border-color: var(--golden-yellow);
-  border-width: 3px;
-}
-
-.btn:hover {
-  background-image: linear-gradient(#ffcc4c, #f89808);
-}
-
-.btn-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .checkpoint-screen {
   position: absolute;
@@ -75,16 +30,45 @@ body {
 }
 
 #canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  touch-action: none;
+}
+
+.mobile-controls {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   display: none;
+  gap: 12px;
+  z-index: 5;
+}
+
+.control-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--golden-yellow);
+  background: #111;
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
 }
 
 @media (min-width: 768px) {
-  .start-screen {
-    width: 60%;
-    max-width: 700px;
-  }
-
   .checkpoint-screen {
     max-width: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-controls {
+    display: flex;
   }
 }

@@ -1,11 +1,13 @@
-const startBtn = document.getElementById("start-btn");
 const canvas = document.getElementById("canvas");
-const startScreen = document.querySelector(".start-screen");
 const checkpointScreen = document.querySelector(".checkpoint-screen");
 const checkpointMessage = document.querySelector(".checkpoint-screen > p");
 const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+const resizeCanvas = () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+};
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 const gravity = 0.5;
 let isCheckpointCollisionDetectionActive = true;
 
@@ -260,12 +262,6 @@ const movePlayer = (key, xVelocity, isPressed) => {
   }
 }
 
-const startGame = () => {
-  canvas.style.display = "block";
-  startScreen.style.display = "none";
-  animate();
-}
-
 const showCheckpointScreen = (msg) => {
   checkpointScreen.style.display = "block";
   checkpointMessage.textContent = msg;
@@ -274,12 +270,62 @@ const showCheckpointScreen = (msg) => {
   }
 };
 
-startBtn.addEventListener("click", startGame);
-
 window.addEventListener("keydown", ({ key }) => {
   movePlayer(key, 8, true);
 });
 
 window.addEventListener("keyup", ({ key }) => {
   movePlayer(key, 0, false);
+});
+
+animate();
+
+const mobileControls = document.querySelector(".mobile-controls");
+const controlButtons = document.querySelectorAll(".control-btn");
+
+const isTouchDevice = () =>
+  "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+if (isTouchDevice()) {
+  mobileControls?.setAttribute("aria-hidden", "false");
+}
+
+const handleControl = (action, isPressed) => {
+  switch (action) {
+    case "left":
+      movePlayer("ArrowLeft", isPressed ? 8 : 0, isPressed);
+      break;
+    case "right":
+      movePlayer("ArrowRight", isPressed ? 8 : 0, isPressed);
+      break;
+    case "jump":
+      if (isPressed) {
+        movePlayer(" ", 0, true);
+      }
+      break;
+  }
+};
+
+controlButtons.forEach((button) => {
+  const action = button.dataset.action;
+  button.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    handleControl(action, true);
+  });
+  button.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    handleControl(action, false);
+  });
+  button.addEventListener("mousedown", (event) => {
+    event.preventDefault();
+    handleControl(action, true);
+  });
+  button.addEventListener("mouseup", (event) => {
+    event.preventDefault();
+    handleControl(action, false);
+  });
+  button.addEventListener("mouseleave", (event) => {
+    event.preventDefault();
+    handleControl(action, false);
+  });
 });
